@@ -17,6 +17,8 @@
             <input type="submit" value="Search">
         </div>
     </form>
+<!-- Reports button for showing the files which are issued -->
+<a href="reports"><button class="btn">Reports</button></a>
 
     <a href="add.jsp">
         <button class="add-btn">+ Add New File</button>
