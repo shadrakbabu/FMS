@@ -30,16 +30,6 @@ public class SearchEmployee extends HttpServlet {
             out.println("<html><head>");
             out.println("<title>Search Results</title>");
             out.println("<link rel='stylesheet' type='text/css' href='css/styles.css'>");
-//            out.println("<script>");
-//            out.println("function enableEdit() {");
-//            out.println("  let inputs = document.querySelectorAll('input[type=text]');");
-//            out.println("  inputs.forEach(i => i.removeAttribute('readonly'));");
-//            out.println("  document.getElementById('saveBtn').style.display = 'inline-block';");
-//            out.println("}");
-//            out.println("function showPersonSelect(select) {");
-//            out.println("  document.getElementById('personGroup').style.display = (select.value === 'Issue') ? 'block' : 'none';");
-//            out.println("}");
-//            out.println("</script>");
             out.println("</head><body>");
 
             out.println("<a href='index.jsp'><button class='back-btn'>");
@@ -106,6 +96,7 @@ public class SearchEmployee extends HttpServlet {
             	out.println("<label>Person:</label>");
             	out.println("<select name='person_name'>");
             	out.println("<option value=''>-- Select Person --</option>");
+                out.println("<option value='Pankaj Solanki'>Pankaj Solanki</option>");
             	out.println("<option value='Shantanu Bhowmick'>Shantanu Bhowmick</option>");
             	out.println("<option value='Jaya Prakasam'>Jaya Prakasam</option>");
             	out.println("<option value='Md Khaleel'>Md Khaleel</option>");
@@ -139,7 +130,6 @@ public class SearchEmployee extends HttpServlet {
 
                 out.println("</tbody></table>");
             }
-
             
             out.println("<script>");
             out.println("function enableEdit() {");
@@ -167,19 +157,9 @@ public class SearchEmployee extends HttpServlet {
             out.println("      }");
             out.println("}");
             out.println("</script>");
-            
-            
-
-
-            
-
             out.println("</body></html>");
             con.close();
-  
             
-            
-            
-
         } catch (Exception e) {
             out.println("<p>Error: " + e.getMessage() + "</p>");
             e.printStackTrace(out);
