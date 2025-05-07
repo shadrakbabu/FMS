@@ -30,6 +30,7 @@ public class SearchEmployee extends HttpServlet {
             out.println("<html><head>");
             out.println("<title>Search Results</title>");
             out.println("<link rel='stylesheet' type='text/css' href='css/styles.css'>");
+
             out.println("</head><body>");
 
             out.println("<a href='index.jsp'><button class='back-btn'>");
@@ -94,9 +95,8 @@ public class SearchEmployee extends HttpServlet {
             	out.println("</select></div>");
             	out.println("<div class='form-group' id='personGroup' style='display:none;'>");
             	out.println("<label>Person:</label>");
-            	out.println("<select name='person_name'>");
+            	out.println("<select name='person_name' onchange='togglePersonInput(this)'>");
             	out.println("<option value=''>-- Select Person --</option>");
-                out.println("<option value='Pankaj Solanki'>Pankaj Solanki</option>");
             	out.println("<option value='Shantanu Bhowmick'>Shantanu Bhowmick</option>");
             	out.println("<option value='Jaya Prakasam'>Jaya Prakasam</option>");
             	out.println("<option value='Md Khaleel'>Md Khaleel</option>");
@@ -106,7 +106,7 @@ public class SearchEmployee extends HttpServlet {
             	out.println("</select></div>");
                 out.println("<div class='form-group' id='otherPersonGroup' style='display:none;'>");
                 out.println("  <label>Enter Person Name:</label>");
-                out.println("  <input type='text' name='other_person' placeholder='Enter name here'>");
+                out.println("  <input type='text' id='other_person' placeholder='Enter name here'>");
                 out.println("</div>");
             	out.println("<div class='form-group'><input type='submit' value='Submit Action'></div>");
             	out.println("</form>");
@@ -130,6 +130,7 @@ public class SearchEmployee extends HttpServlet {
 
                 out.println("</tbody></table>");
             }
+
             
             out.println("<script>");
             out.println("function enableEdit() {");
@@ -141,25 +142,48 @@ public class SearchEmployee extends HttpServlet {
             out.println("  });");
             out.println("  document.getElementById('saveBtn').style.display = 'inline-block';");
             out.println("}");
+
             out.println("function showPersonSelect(select) {");
             out.println("  var personGroup = document.getElementById('personGroup');");
-            out.println("  var personSelect = document.getElementById('personSelect');");
             out.println("  var otherPersonGroup = document.getElementById('otherPersonGroup');");
             out.println("  if (select.value === 'Issue') {");
             out.println("    personGroup.style.display = 'block';");
             out.println("  } else {");
-            out.println("    personGroup.style.display = 'block';");
+            out.println("    personGroup.style.display = 'none';");
+            out.println("    otherPersonGroup.style.display = 'none';");
             out.println("  }");
-            out.println("      if (select.value === 'other') {");
-            out.println("        otherPersonGroup.style.display = 'block';");
-            out.println("      } else {");
-            out.println("        otherPersonGroup.style.display = 'none';");
-            out.println("      }");
             out.println("}");
-            out.println("</script>");
+
+            out.println("function togglePersonInput(select) {");
+            out.println("  var otherGroup = document.getElementById('otherPersonGroup');");
+            out.println("  if (select.value === 'other') {");
+            out.println("    otherGroup.style.display = 'block';");
+            out.println("  } else {");
+            out.println("    otherGroup.style.display = 'none';");
+            out.println("  }");
+            out.println("}");
+
+            out.println("document.addEventListener('DOMContentLoaded', function () {");
+            out.println("  const form = document.querySelector('.action-form');");
+            out.println("  if (form) {");
+            out.println("    form.addEventListener('submit', function (e) {");
+            out.println("      const personSelect = form.querySelector('select[name=\"person_name\"]');");
+            out.println("      const otherInput = form.querySelector('input[name=\"other_person\"]');");
+            out.println("      if (personSelect && otherInput && personSelect.value === 'other') {");
+            out.println("        personSelect.value = otherInput.value.trim();");
+            out.println("      }");
+            out.println("    });");
+            out.println("  }");
+            out.println("});");
+            out.println("</script>");          
+
             out.println("</body></html>");
             con.close();
+  
             
+            
+            
+
         } catch (Exception e) {
             out.println("<p>Error: " + e.getMessage() + "</p>");
             e.printStackTrace(out);
